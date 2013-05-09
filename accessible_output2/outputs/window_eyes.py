@@ -1,6 +1,7 @@
 import win32gui
 from libloader.com import load_com
-from base import Output
+from base import Output, OutputError
+import pywintypes
 
 class WindowEyes (Output):
  """Speech output supporting the WindowEyes screen reader"""
@@ -9,7 +10,10 @@ class WindowEyes (Output):
 
  def __init__(self, *args, **kwargs):
   super(WindowEyes, self).__init__(*args, **kwargs)
-  self.object = load_com("gwspeak.speak")
+  try:
+   self.object = load_com("gwspeak.speak")
+  except pywintypes.com_error:
+   raise OutputError
 
  def output(self, text, interrupt=0):
   if interrupt:
