@@ -1,6 +1,5 @@
 import accessible_output2
-from base import Output
-import pywintypes
+from base import Output, OutputError
 
 class Auto(Output):
 
@@ -10,7 +9,7 @@ class Auto(Output):
   for output in output_classes:
    try:
     self.outputs.append(output())
-   except pywintypes.com_error:
+   except OutputError:
     pass
 
  def get_first_available_output(self):

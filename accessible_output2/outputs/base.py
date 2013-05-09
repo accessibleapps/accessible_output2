@@ -1,6 +1,9 @@
 from accessible_output2 import load_library
 import platform
 
+class OutputError(Exception):
+ pass
+
 class Output(object):
  name = "Unnamed Output" #The name of this output
  lib32 = None #name of 32-bit lib
