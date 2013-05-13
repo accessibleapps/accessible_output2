@@ -4,7 +4,10 @@ import types
 from platform_utils import paths
 
 def load_library(libname):
- libfile = os.path.join(paths.module_path(), 'lib', libname)
+ if paths.is_frozen():
+  libfile = os.path.join(paths.embedded_data_path(), 'accessible_output2', 'lib', libname)
+ else:
+  libfile = os.path.join(paths.module_path(), 'lib', libname)
  return ctypes.windll[libfile]
 
 def get_output_classes():
