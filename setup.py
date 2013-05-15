@@ -6,7 +6,10 @@ _system = system()
 
 install_requires = []
 if _system == 'Windows':
- install_requires += ['pywin32', 'libloader']
+ install_requires += [
+ #'pywin32',
+ 'libloader'
+]
 
 
 setup(
