@@ -1,10 +1,11 @@
 from collections import OrderedDict
 from libloader.com import load_com
-
+from base import Output, OutputError
+import pywintypes
 import logging
 log = logging.getLogger(__name__)
 
-class SAPI5(object):
+class SAPI5(Output):
  has_volume = True
  has_rate = True
  has_pitch = True
@@ -18,8 +19,11 @@ class SAPI5(object):
  priority = 101
 
  def __init__(self):
-  self.object = load_com("SAPI.SPVoice")
-  self._voices = self._available_voices()
+  try:
+   self.object = load_com("SAPI.SPVoice")
+   self._voices = self._available_voices()
+  except pywintypes.com_error:
+   raise OutputError
   self._pitch = 0
 
  def _available_voices(self):
