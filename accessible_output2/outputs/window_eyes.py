@@ -15,7 +15,7 @@ class WindowEyes (Output):
   except pywintypes.com_error:
    raise OutputError
 
- def output(self, text, interrupt=0):
+ def speak(self, text, interrupt=0):
   if interrupt:
    self.silence()
   self.object.SpeakString(text)
