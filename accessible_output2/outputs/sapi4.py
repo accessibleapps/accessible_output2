@@ -130,7 +130,9 @@ class Sapi4(Output):
  def max_volume(self):
   return self._max_volume
 
- def speak(self, text):
+ def speak(self, text, interrupt=False):
+  if interrupt:
+   self.silence()
   self.__object.Speak(text)
 
  def silence(self):
