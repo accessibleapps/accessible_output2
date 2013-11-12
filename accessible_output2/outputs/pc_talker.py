@@ -6,7 +6,9 @@ class PCTalker(Output):
  def __init__(self):
   self.lib = ctypes.cdll.pctkusr
 
- def speak(self, text):
+ def speak(self, text, interrupt=False):
+  if interrupt:
+   self.silence()
   self.lib.PCTKPRead(text.encode('cp932', 'replace'))
 
  def silence(self):
@@ -14,3 +16,5 @@ class PCTalker(Output):
 
  def is_active(self):
   return self.lib.PCTKStatus() != 0
+
+output_class = PCTalker

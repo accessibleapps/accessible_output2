@@ -10,7 +10,7 @@ class SystemAccess (Output):
  def braille(self, text, **options):
   self.lib.SA_BrlShowTextW(unicode(text))
 
- def speak(self, text, interrupt=0):
+ def speak(self, text, interrupt=False):
   if self.is_active():
    self.dll.SA_SayW(unicode(text))
 

@@ -67,7 +67,9 @@ class SAPI5(Output):
  def set_volume(self, value):
   self.object.Volume = value
 
- def speak(self, text):
+ def speak(self, text, interrupt=False):
+  if interrupt:
+   self.silence()
   # We need to do the pitch in XML here
   textOutput = "<pitch absmiddle=\"%d\">%s</pitch>" % (round(self._pitch), text.replace("<", "&lt;"))
   self.object.Speak(textOutput, 1|8)
