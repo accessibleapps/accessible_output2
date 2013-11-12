@@ -2,9 +2,8 @@ import ctypes
 from base import Output
 
 class PCTalker(Output):
-
- def __init__(self):
-  self.lib = ctypes.cdll.pctkusr
+ lib32 = 'pctkusr.dll'
+ lib64 = 'pctkusr64.dll'
 
  def speak(self, text, interrupt=False):
   if interrupt:
