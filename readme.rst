@@ -7,6 +7,7 @@ Accessible Output 2 makes selection of the appropriate speech and Braille output
 
 .. code-block:: pycon
 
+>>> import accessible_output2.outputs.auto
     >>> o = accessible_output2.outputs.auto.Auto()
     >>> o.output("Some text") #attempts to both speak and braille the given text through the first available output
     >>> o.speak("Some other text", interrupt=True) #Speak some text through the output, without brailling it, and interrupt the currently-speaking text if any
