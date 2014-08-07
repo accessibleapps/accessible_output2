@@ -17,6 +17,7 @@ class SAPI5(Output):
  max_volume = 100
  name = "sapi5"
  priority = 101
+ system_output = True
 
  def __init__(self):
   try:
