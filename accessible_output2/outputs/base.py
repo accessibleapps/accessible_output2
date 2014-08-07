@@ -9,6 +9,7 @@ class Output(object):
  lib32 = None #name of 32-bit lib
  lib64 = None #name of 64-bit lib
  priority = 100 #Where to sort in the list of available outputs for automaticly speaking
+ system_output = False
 
  def __init__(self):
   is_32bit = platform.architecture()[0] == "32bit"
@@ -28,4 +29,6 @@ class Output(object):
   if not output:
    raise RuntimeError("Output %r does not have any method defined to output" % self)
 
+ def is_system_output(self):
+  return self.system_output
 
