@@ -8,5 +8,8 @@ if platform.system() == 'Windows':
  import dolphin
  import pc_talker
  #import sapi4
- 
+
+if platform.system() == 'Darwin':
+ import voiceover
+
 import auto
