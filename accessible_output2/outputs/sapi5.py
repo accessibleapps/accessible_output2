@@ -5,6 +5,14 @@ import pywintypes
 import logging
 log = logging.getLogger(__name__)
 
+SVSFDefault = 0
+SVSFlagsAsync = 1
+SVSFPurgeBeforeSpeak = 2
+SVSFIsFilename = 4
+SVSFIsXML = 8
+SVSFIsNotXML = 16
+SVSFPersistXML = 32
+
 class SAPI5(Output):
  has_volume = True
  has_rate = True
@@ -73,10 +81,10 @@ class SAPI5(Output):
    self.silence()
   # We need to do the pitch in XML here
   textOutput = "<pitch absmiddle=\"%d\">%s</pitch>" % (round(self._pitch), text.replace("<", "&lt;"))
-  self.object.Speak(textOutput, 1|8)
+  self.object.Speak(textOutput, SVSFlagsAsync | SVSFIsXML)
  
  def silence(self):
-  self.object.Speak("", 3)
+  self.object.Speak("", SVSFlagsAsync | SVSFPurgeBeforeSpeak)
 
  def is_active(self):
   if self.object:
