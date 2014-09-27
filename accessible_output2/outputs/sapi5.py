@@ -42,14 +42,14 @@ class SAPI5(Output):
   return _voices
 
  def list_voices(self):
-  return self.available_voices.keys()
+  return self._voices.keys()
 
  def get_voice(self):
   return self.object.Voice.GetDescription()
 
  def set_voice(self, value):
   log.debug("Setting SAPI5 voice to \"%s\"" % value)
-  self.object.Voice = self.available_voices[value]
+  self.object.Voice = self._voices[value]
   # For some reason SAPI5 does not reset audio after changing the voice
   # By setting the audio device after changing voices seems to fix this
   # This was noted from information at:
