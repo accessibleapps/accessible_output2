@@ -11,5 +11,6 @@ if platform.system() == 'Windows':
 
 if platform.system() == 'Darwin':
  import voiceover
+ import say
 
 import auto
