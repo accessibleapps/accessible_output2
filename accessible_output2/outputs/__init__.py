@@ -13,4 +13,7 @@ if platform.system() == 'Darwin':
  import voiceover
  import say
 
+if platform.system() == 'Linux':
+ import e_speak
+
 import auto
