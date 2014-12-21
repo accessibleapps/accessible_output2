@@ -8,15 +8,16 @@ class Output(object):
  name = "Unnamed Output"
  lib32 = None
  lib64 = None
+ cdll = False
  priority = 100
  system_output = False
 
  def __init__(self):
   self.is_32bit = platform.architecture()[0] == "32bit"
   if self.lib32 and self.is_32bit:
-   self.lib = load_library(self.lib32)
+   self.lib = load_library(self.lib32, cdll=self.cdll)
   elif self.lib64:
-   self.lib = load_library(self.lib64)
+   self.lib = load_library(self.lib64, cdll=self.cdll)
   else:
    self.lib = None
 
