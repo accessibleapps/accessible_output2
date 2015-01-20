@@ -1,6 +1,7 @@
+from __future__ import absolute_import
 from collections import OrderedDict
 from libloader.com import load_com
-from base import Output, OutputError
+from .base import Output, OutputError
 import pywintypes
 import logging
 log = logging.getLogger(__name__)
@@ -42,7 +43,7 @@ class SAPI5(Output):
   return _voices
 
  def list_voices(self):
-  return self._voices.keys()
+  return list(self._voices.keys())
 
  def get_voice(self):
   return self.object.Voice.GetDescription()

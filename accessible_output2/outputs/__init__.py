@@ -1,19 +1,20 @@
+from __future__ import absolute_import
 import platform
 if platform.system() == 'Windows':
- import nvda
- import jaws
- import sapi5
- import window_eyes
- import system_access
- import dolphin
- import pc_talker
+ from . import nvda
+ from . import jaws
+ from . import sapi5
+ from . import window_eyes
+ from . import system_access
+ from . import dolphin
+ from . import pc_talker
  #import sapi4
 
 if platform.system() == 'Darwin':
- import voiceover
- import say
+ from . import voiceover
+ from . import say
 
 if platform.system() == 'Linux':
- import e_speak
+ from . import e_speak
 
-import auto
+from . import auto

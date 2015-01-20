@@ -1,5 +1,6 @@
+from __future__ import absolute_import
 import ctypes
-from base import Output
+from .base import Output
 
 class PCTalker(Output):
  lib32 = 'pctkusr.dll'

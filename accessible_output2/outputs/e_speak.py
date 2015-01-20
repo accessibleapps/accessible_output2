@@ -1,4 +1,5 @@
-from base import Output
+from __future__ import absolute_import
+from .base import Output
 
 try:
  import espeak.core

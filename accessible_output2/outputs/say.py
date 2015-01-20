@@ -1,5 +1,6 @@
+from __future__ import absolute_import
 import os
-from base import Output
+from .base import Output
 
 class AppleSay(Output):
  """Speech output supporting the Apple Say subsystem."""
