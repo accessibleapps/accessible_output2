@@ -1,9 +1,11 @@
+from __future__ import absolute_import
+from builtins import str
 import os
 import platform
 
 from platform_utils import paths
 from libloader import load_library
-from base import Output
+from .base import Output
 
 class NVDA(Output):
  """Supports The NVDA screen reader"""
@@ -18,12 +20,12 @@ class NVDA(Output):
    return False
 
  def braille(self, text, **options):
-  self.lib.nvdaController_brailleMessage(unicode(text))
+  self.lib.nvdaController_brailleMessage(str(text))
 
  def speak(self, text, interrupt=False):
   if interrupt:
    self.silence()
-  self.lib.nvdaController_speakText(unicode(text))
+  self.lib.nvdaController_speakText(str(text))
 
  def silence(self):
   self.lib.nvdaController_cancelSpeech()

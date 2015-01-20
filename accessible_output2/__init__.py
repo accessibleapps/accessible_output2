@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import ctypes
 import os
 import types
@@ -14,9 +15,9 @@ def load_library(libname, cdll=False):
   return ctypes.windll[libfile]
 
 def get_output_classes():
- import outputs
+ from . import outputs
  module_type = types.ModuleType
- classes = [m.output_class for m in outputs.__dict__.itervalues() if type(m) == module_type and hasattr(m, 'output_class')]
+ classes = [m.output_class for m in outputs.__dict__.values() if type(m) == module_type and hasattr(m, 'output_class')]
  return sorted(classes, key=lambda c: c.priority)
 
 def find_datafiles():

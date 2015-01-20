@@ -1,4 +1,6 @@
-from base import Output
+from __future__ import absolute_import
+from builtins import str
+from .base import Output
 
 class SystemAccess (Output):
  """Supports System Access and System Access Mobile"""
@@ -8,11 +10,11 @@ class SystemAccess (Output):
  priority = 99
 
  def braille(self, text, **options):
-  self.lib.SA_BrlShowTextW(unicode(text))
+  self.lib.SA_BrlShowTextW(str(text))
 
  def speak(self, text, interrupt=False):
   if self.is_active():
-   self.dll.SA_SayW(unicode(text))
+   self.dll.SA_SayW(str(text))
 
  def is_active(self):
   try:

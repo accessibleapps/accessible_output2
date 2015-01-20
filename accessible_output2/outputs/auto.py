@@ -1,5 +1,6 @@
+from __future__ import absolute_import
 import accessible_output2
-from base import Output, OutputError
+from .base import Output, OutputError
 
 class Auto(Output):
 

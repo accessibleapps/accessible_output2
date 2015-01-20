@@ -1,3 +1,4 @@
+from builtins import object
 from accessible_output2 import load_library
 import platform
 
