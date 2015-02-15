@@ -1,5 +1,4 @@
 from __future__ import absolute_import
-from builtins import str
 import os
 import platform
 import ctypes
@@ -25,12 +24,12 @@ class NVDA(Output):
    return False
 
  def braille(self, text, **options):
-  self.lib.nvdaController_brailleMessage(str(text))
+  self.lib.nvdaController_brailleMessage(text)
 
  def speak(self, text, interrupt=False):
   if interrupt:
    self.silence()
-  self.lib.nvdaController_speakText(str(text))
+  self.lib.nvdaController_speakText(text)
 
  def silence(self):
   self.lib.nvdaController_cancelSpeech()
