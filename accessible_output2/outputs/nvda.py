@@ -2,6 +2,7 @@ from __future__ import absolute_import
 from builtins import str
 import os
 import platform
+import ctypes
 
 from platform_utils import paths
 from libloader import load_library
@@ -12,6 +13,10 @@ class NVDA(Output):
  name = "NVDA"
  lib32 = 'nvdaControllerClient32.dll'
  lib64 = 'nvdaControllerClient64.dll'
+ argtypes = {
+  'nvdaController_brailleMessage': (ctypes.c_wchar_p,),
+ 'nvdaController_speakText': (ctypes.c_wchar_p,),
+ }
 
  def is_active(self):
   try:

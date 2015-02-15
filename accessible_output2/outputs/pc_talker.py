@@ -6,6 +6,9 @@ class PCTalker(Output):
  lib32 = 'pctkusr.dll'
  lib64 = 'pctkusr64.dll'
  cdll = True
+ argtypes = {
+  'PCTKPRead': (ctypes.c_char_p, ctypes.c_int, ctypes.c_int)
+ }
 
  def speak(self, text, interrupt=False):
   if interrupt:
