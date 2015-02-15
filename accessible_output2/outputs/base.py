@@ -9,6 +9,7 @@ class Output(object):
  name = "Unnamed Output"
  lib32 = None
  lib64 = None
+ argtypes = {}
  cdll = False
  priority = 100
  system_output = False
@@ -21,6 +22,12 @@ class Output(object):
    self.lib = load_library(self.lib64, cdll=self.cdll)
   else:
    self.lib = None
+  if self.lib is not None:
+   for func in self.argtypes:
+    try:
+     getattr(self.lib, func).argtypes = self.argtypes[func]
+    except AttributeError:
+     pass
 
  def output(self, text, **options):
   output = False

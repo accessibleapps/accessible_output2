@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 from builtins import str
 import os
+import ctypes
 
 from .base import Output
 
@@ -9,6 +10,10 @@ class Dolphin (Output):
 
  name = 'Dolphin'
  lib32 = 'dolapi.dll'
+ argtypes = {
+  'DolAccess_Command': (ctypes.c_wchar_p, ctypes.c_int, ctypes.c_int),
+  'DolAccess_Action': (ctypes.c_int,),
+ }
 
  def speak(self, text, interrupt=0):
   if interrupt:

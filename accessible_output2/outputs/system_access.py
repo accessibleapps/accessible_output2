@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 from builtins import str
+import ctypes
 from .base import Output
 
 class SystemAccess (Output):
@@ -7,6 +8,10 @@ class SystemAccess (Output):
 
  name = "System Access"
  lib32 = 'saapi32.dll'
+ argtypes = {
+  'SA_BrlShowTextW': (ctypes.c_wchar_p,),
+  'SA_SayW': (ctypes.c_wchar_p,),
+ }
  priority = 99
 
  def braille(self, text, **options):
