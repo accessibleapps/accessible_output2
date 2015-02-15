@@ -1,5 +1,4 @@
 from __future__ import absolute_import
-from builtins import str
 import ctypes
 from .base import Output
 
@@ -15,7 +14,7 @@ class SystemAccess (Output):
  priority = 99
 
  def braille(self, text, **options):
-  self.lib.SA_BrlShowTextW(str(text))
+  self.lib.SA_BrlShowTextW(text)
 
  def speak(self, text, interrupt=False):
   if self.is_active():
