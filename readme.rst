@@ -5,7 +5,7 @@ Accessible Output 2 is an MIT licensed library for speaking and brailling throug
 
 Accessible Output 2 makes selection of the appropriate speech and Braille output a snap, and also allows the programmer to select and use a specific output, for instance to force speaking through the Microsoft Speech API even if the user has a screen reader loaded.
 
-.. code-block:: pycon
+.. code-block:: python
 
 >>> import accessible_output2.outputs.auto
     >>> o = accessible_output2.outputs.auto.Auto()
