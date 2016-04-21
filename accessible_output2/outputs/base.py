@@ -40,7 +40,7 @@ class Output(object):
  def is_system_output(self):
   return self.system_output
 
- def speak(self, **optiont):
+ def speak(self, text, **options):
   return False
 
  def braille(self, **options):
