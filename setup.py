@@ -7,7 +7,7 @@ _system = system()
 install_requires = []
 if _system == 'Windows':
  install_requires += [
- #'pywin32',
+ 'pypiwin32',
  'libloader'
 ]
 
@@ -20,7 +20,7 @@ setup(
  name = 'accessible_output2',
  author = 'Tyler Spivey',
  author_email = 'tspivey@pcdesk.net',
- version='0.12.dev0',
+ version='0.13',
  description = __doc__,
  long_description = long_description,
  package_dir = {'accessible_output2': 'accessible_output2'},
@@ -28,7 +28,7 @@ setup(
  package_data = {"accessible_output2": ["lib/*"]},
  zip_safe = False,
  classifiers = [
-  'Development Status :: 4 - Beta',
+  'Development Status :: 5 - Stable',
   'Intended Audience :: Developers',
   'Operating System :: Microsoft :: Windows',
   'Programming Language :: Python',
