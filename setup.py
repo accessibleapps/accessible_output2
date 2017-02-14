@@ -7,6 +7,7 @@ _system = system()
 install_requires = []
 if _system == 'Windows':
 	install_requires += [
+	'platform_utils',
 	'pypiwin32',
 	'libloader'
 ]
