@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
+import io
 from platform import system
-
 
 _system = system()
 
@@ -14,7 +14,7 @@ if _system == 'Windows':
 
 __doc__ = 'Library to provide speech and braille output to a variety of different screen readers and other accessibility solutions.',
 
-with open('readme.rst') as readme:
+with io.open('readme.rst', encoding='UTF8') as readme:
 	long_description = readme.read()
 
 setup(
