@@ -4,13 +4,16 @@ from platform import system
 
 _system = system()
 
-install_requires = []
+install_requires = ['platform_utils']
 if _system == 'Windows':
 	install_requires += [
-	'platform_utils',
 	'pypiwin32',
 	'libloader'
 ]
+elif _system == 'Darwin':
+	install_requires += [
+		'appscript',
+	]
 
 __doc__ = 'Library to provide speech and braille output to a variety of different screen readers and other accessibility solutions.',
 
