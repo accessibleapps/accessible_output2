@@ -12,7 +12,6 @@ if platform.system() == 'Windows':
 
 if platform.system() == 'Darwin':
 	from . import voiceover
-	from . import say
 
 if platform.system() == 'Linux':
 	from . import e_speak
