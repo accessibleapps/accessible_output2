@@ -4,30 +4,32 @@ from libloader.com import load_com
 from .base import Output, OutputError
 import pywintypes
 
-class WindowEyes (Output):
-	"""Speech output supporting the WindowEyes screen reader"""
 
-	name = 'Window-Eyes'
+class WindowEyes(Output):
+    """Speech output supporting the WindowEyes screen reader"""
 
-	def __init__(self, *args, **kwargs):
-		super(WindowEyes, self).__init__(*args, **kwargs)
-		try:
-			self.object = load_com("gwspeak.speak")
-		except pywintypes.com_error:
-			raise OutputError
+    name = "Window-Eyes"
 
-	def speak(self, text, interrupt=0):
-		if interrupt:
-			self.silence()
-		self.object.SpeakString(text)
+    def __init__(self, *args, **kwargs):
+        super(WindowEyes, self).__init__(*args, **kwargs)
+        try:
+            self.object = load_com("gwspeak.speak")
+        except pywintypes.com_error:
+            raise OutputError
 
-	def silence (self):
-		self.object.Silence()
+    def speak(self, text, interrupt=0):
+        if interrupt:
+            self.silence()
+        self.object.SpeakString(text)
 
-	def is_active(self):
-		try:
-			return win32gui.FindWindow("GWMExternalControl", "External Control") != 0
-		except:
-			return False
+    def silence(self):
+        self.object.Silence()
 
-output_class = WindowEyes 
+    def is_active(self):
+        try:
+            return win32gui.FindWindow("GWMExternalControl", "External Control") != 0
+        except:
+            return False
+
+
+output_class = WindowEyes
