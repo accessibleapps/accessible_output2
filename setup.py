@@ -25,7 +25,7 @@ setup(
         ':sys_platform == "darwin"': ["appscript"],
     },
     classifiers=[
-        "Development Status :: 5 - Stable",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Operating System :: Microsoft :: Windows",
         "Programming Language :: Python",
