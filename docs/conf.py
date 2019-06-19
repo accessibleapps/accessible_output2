@@ -12,7 +12,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath('..'))
 
 
 # -- Project information -----------------------------------------------------
@@ -20,6 +20,9 @@ sys.path.insert(0, os.path.abspath('.'))
 project = 'accessible_output2'
 copyright = '2019, Tyler Spivey, Christopher Toth'
 author = 'Tyler Spivey, Christopher Toth'
+
+# To prevent master file contents.rst not found.
+master_doc = 'index'
 
 # The full version, including alpha/beta/rc tags
 release = '0.14'
@@ -56,3 +59,9 @@ html_theme = 'alabaster'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# Autodoc Options
+
+autoclass_content = 'both'
+
+autodoc_member_order = 'bysource'

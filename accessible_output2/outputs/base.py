@@ -3,10 +3,12 @@ import platform
 
 
 class OutputError(Exception):
+    """Raised by outputs if they fail to initialize or output"""
     pass
 
 
 class Output(object):
+    """The base Output object"""
     name = "Unnamed Output"
     lib32 = None
     lib64 = None
@@ -31,6 +33,16 @@ class Output(object):
                     pass
 
     def output(self, text, **options):
+        """
+        Output the given text in both speech and braille depending on what the output supports
+
+        Args:
+          text: 
+          **options: 
+
+        Returns:
+
+        """
         output = False
         if self.speak(text, **options):
             output = True
@@ -42,10 +54,31 @@ class Output(object):
             )
 
     def is_system_output(self):
+        """ """
         return self.system_output
 
     def speak(self, text, **options):
+        """
+        Speaks the given text if the output supports speech
+
+        Args:
+          text: 
+          **options: 
+
+        Returns:
+
+        """
         return False
 
     def braille(self, text, **options):
+        """
+        Brailles the given text if the output supports Braille
+
+        Args:
+          text: 
+          **options: 
+
+        Returns:
+
+        """
         return False
