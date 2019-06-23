@@ -8,14 +8,35 @@ class OutputError(Exception):
 
 
 class Output(object):
-    """The base Output object"""
+    """The base Output object.
+    Most functionality is found in child classes.
+    If wishing to implement support for a new output, it might be helpful to take a look at an existing one to see how everything works.
+    """
+
     name = "Unnamed Output"
+    """str: Name of the output. This attribute should be defined in all child classes for usability purposes."""
+
     lib32 = None
+    """str: Path pointing to a 32 bit DLL used to interface with the output. Can be None."""
+
     lib64 = None
+    """str: Path pointing to a 64 bit DLL used to interface with the output. Can be None."""
+
     argtypes = {}
+    """dict: A mapping of funtion names (str) to signatures (tuple) containing C types."""
+
     cdll = False
+    """bool: Whether the DLL uses __cdecl calling conventions and should be loaded accordingly."""
+
     priority = 100
+    """int: The priority this output should be given when automatically choosing possible outputs.
+    See :class:`accessible_output2.outputs.auto.Auto`.
+    Priority begins at 100. Anything higher will throw it lower on the list of available outputs. Anything lower will make it more likely to be the first option selected.
+    Example, screen readers are sometimes given a higher priority (usuallly 100) than TTS such as SAAPI5 (101) due to a common usability preference."""
+
     system_output = False
+    """bool: Is this output present and accessible on most systems with little or no additional installation or configuration?
+    example: SAPI5 is a system output, while NVDA is not."""
 
     def __init__(self):
         self.is_32bit = platform.architecture()[0] == "32bit"
@@ -34,14 +55,14 @@ class Output(object):
 
     def output(self, text, **options):
         """
-        Output the given text in both speech and braille depending on what the output supports
+        Output the given text in speech, braille or both depending on what the output supports
 
         Args:
-          text: 
-          **options: 
+          text (str): The text to output.
+          **options: Additional options.
 
-        Returns:
-
+        raises:
+            RuntimeError: If the requested output doesn't define either speak or braille.
         """
         output = False
         if self.speak(text, **options):
@@ -54,7 +75,6 @@ class Output(object):
             )
 
     def is_system_output(self):
-        """ """
         return self.system_output
 
     def speak(self, text, **options):
@@ -62,10 +82,8 @@ class Output(object):
         Speaks the given text if the output supports speech
 
         Args:
-          text: 
-          **options: 
-
-        Returns:
+          text (str): The text to speak.
+          **options: Additional options.
 
         """
         return False
@@ -75,10 +93,8 @@ class Output(object):
         Brailles the given text if the output supports Braille
 
         Args:
-          text: 
-          **options: 
-
-        Returns:
+          text (str): The text to braille.
+          **options: Additional options.
 
         """
         return False
