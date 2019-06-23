@@ -1,8 +1,6 @@
 from __future__ import absolute_import
 
 from .base import Output
-import appscript
-
 
 class VoiceOver(Output):
 
@@ -11,6 +9,7 @@ class VoiceOver(Output):
     name = "VoiceOver"
 
     def __init__(self, *args, **kwargs):
+        import appscript
         self.app = appscript.app("voiceover")
 
     def speak(self, text, interrupt=False):

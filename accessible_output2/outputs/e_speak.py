@@ -2,7 +2,7 @@ from __future__ import absolute_import
 from .base import Output
 
 class ESpeak(Output):
-    """Speech output supporting ESpeak on Linux
+    """Supports ESpeak on Linux
 
     Note this requires python-espeak to be installed
     This can be done on Debian distros by using apt-get install python-espeak

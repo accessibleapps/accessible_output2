@@ -4,6 +4,9 @@ from .base import Output
 
 
 class PCTalker(Output):
+    """Supports the PC Talker screen reader."""
+
+    name = "PC Talker"
     lib32 = "pctkusr.dll"
     lib64 = "pctkusr64.dll"
     cdll = True

@@ -17,6 +17,8 @@ SVSFPersistXML = 32
 
 
 class SAPI5(Output):
+    """Supports the microsoft speech API version 5."""
+
     has_volume = True
     has_rate = True
     has_pitch = True

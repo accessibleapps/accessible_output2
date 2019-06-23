@@ -9,6 +9,7 @@ log = logging.getLogger(__name__)
 
 
 class Sapi4(Output):
+    """Supports the microsoft speech API version 4."""
 
     name = "sapi4"
     priority = 102

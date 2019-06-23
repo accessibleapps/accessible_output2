@@ -7,7 +7,7 @@ from .base import Output, OutputError
 
 
 class Jaws(Output):
-    """Output supporting the Jaws for Windows screen reader."""
+    """Supports the Jaws for Windows screen reader."""
 
     name = "jaws"
 
