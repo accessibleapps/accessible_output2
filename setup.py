@@ -19,7 +19,7 @@ setup(
     packages=find_packages(),
     package_data={"accessible_output2": ["lib/*"]},
     zip_safe=False,
-    install_requires=["platform_utils"],
+    install_requires=["libloader", "platform_utils"],
     extras_require={
         ':sys_platform == "win32"': ["pywin32", "libloader"],
         ':sys_platform == "darwin"': ["appscript"],
