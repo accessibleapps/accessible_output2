@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import io
 
 __doc__ = (
-    "Library to provide speech and braille output to a variety of different screen readers and other accessibility solutions.",
+    """Library to provide speech and braille output to a variety of different screen readers and other accessibility solutions.""",
 )
 
 with io.open("readme.rst", encoding="UTF8") as readme:
