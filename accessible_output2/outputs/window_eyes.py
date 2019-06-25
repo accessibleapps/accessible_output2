@@ -1,5 +1,4 @@
 from __future__ import absolute_import
-import win32gui
 from libloader.com import load_com
 from .base import Output, OutputError
 import pywintypes
@@ -26,6 +25,10 @@ class WindowEyes(Output):
         self.object.Silence()
 
     def is_active(self):
+        try:
+            import win32gui
+        except ImportError:
+            return False
         try:
             return win32gui.FindWindow("GWMExternalControl", "External Control") != 0
         except:

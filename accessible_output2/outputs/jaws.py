@@ -1,5 +1,4 @@
 from __future__ import absolute_import
-import win32gui
 from libloader.com import load_com
 import pywintypes
 
@@ -27,6 +26,10 @@ class Jaws(Output):
         self.object.SayString("      %s" % text, interrupt)
 
     def is_active(self):
+        try:
+            import win32gui
+        except ImportError:
+            return False
         try:
             return (
                 self.object.SayString("", 0) == True
