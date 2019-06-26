@@ -14,8 +14,7 @@ def load_library(libname, cdll=False):
         libfile = os.path.join(paths.module_path(), "lib", libname)
     if cdll:
         return ctypes.cdll[libfile]
-    else:
-        return ctypes.windll[libfile]
+    return ctypes.windll[libfile]
 
 
 def get_output_classes():
@@ -25,13 +24,12 @@ def get_output_classes():
     classes = [
         m.output_class
         for m in outputs.__dict__.values()
-        if type(m) == module_type and hasattr(m, "output_class")
+        if isinstance(m, module_type) and hasattr(m, "output_class")
     ]
     return sorted(classes, key=lambda c: c.priority)
 
 
 def find_datafiles():
-    import os
     import platform
     from glob import glob
     import accessible_output2
