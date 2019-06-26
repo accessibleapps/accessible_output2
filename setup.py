@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import io
 
 __doc__ = (
-    """Library to provide speech and braille output to a variety of different screen readers and other accessibility solutions.""",
+    """Library to provide speech and braille output to a variety of different screen readers and other accessibility solutions."""
 )
 
 with io.open("readme.rst", encoding="UTF8") as readme:
@@ -12,7 +12,7 @@ setup(
     name="accessible_output2",
     author="Tyler Spivey",
     author_email="tspivey@pcdesk.net",
-    version="0.15",
+    version="0.16",
     description=__doc__,
     long_description=long_description,
     package_dir={"accessible_output2": "accessible_output2"},
