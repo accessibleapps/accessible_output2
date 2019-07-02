@@ -15,18 +15,35 @@ class Auto(Output):
                 pass
 
     def get_first_available_output(self):
-        """Find the ffirst available output"""
+        """
+        Finds the ffirst available output.
+        This is automatically called in braille, output and speak.
+        """
         for output in self.outputs:
             if output.is_active():
                 return output
         return None
 
     def speak(self, *args, **kwargs):
+        """
+        Speaks the given text if the output supports speech
+
+        Args:
+          text (str): The text to speak.
+          **options: Additional options.
+        """
         output = self.get_first_available_output()
         if output:
             output.speak(*args, **kwargs)
 
     def braille(self, *args, **kwargs):
+        """
+        Brailles the given text if the output supports Braille
+
+        Args:
+          text (str): The text to braille.
+          **options: Additional options.
+        """
         output = self.get_first_available_output()
         if output:
             output.braille(*args, **kwargs)
@@ -37,7 +54,7 @@ class Auto(Output):
             output.speak(*args, **kwargs)
 
     def is_system_output(self):
-        """Is the current output a system output?"""
+        """Returns True if this output is a system output."""
         output = self.get_first_available_output()
         if output:
             return output.is_system_output()

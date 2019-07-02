@@ -79,22 +79,20 @@ class Output(object):
 
     def speak(self, text, **options):
         """
-        Speaks the given text if the output supports speech
+        Speaks the given text.
 
         Args:
           text (str): The text to speak.
           **options: Additional options.
-
         """
         return False
 
     def braille(self, text, **options):
         """
-        Brailles the given text if the output supports Braille
+        Brailles the given text.
 
         Args:
           text (str): The text to braille.
           **options: Additional options.
-
         """
         return False
