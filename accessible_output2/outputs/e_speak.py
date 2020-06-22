@@ -10,28 +10,25 @@ class ESpeak(Output):
 	"""
 
     name = "Linux ESpeak"
+    _ec = None
 
     def __init__(self):
         try:
             import espeak.core
+            self._ec = espeak.core
         except:
-            raise RuntimeError("Cannot find espeak.core. Please install python-espeak")
-
+            print("Cannot find espeak.core. Please install python-espeak or python3-espeak.")
 
     def is_active(self):
-        try:
-            import espeak.core
-        except:
-            return False
-        return True
+        return self._ec is not None
 
     def speak(self, text, interrupt=0):
         if interrupt:
             self.silence()
-        espeak.core.synth(text)
+        self._ec.synth(text)
 
     def silence(self):
-        espeak.core.cancel()
+        self._ec.cancel()
 
 
 output_class = ESpeak
