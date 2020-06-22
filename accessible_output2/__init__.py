@@ -12,6 +12,12 @@ def load_library(libname, cdll=False):
         )
     else:
         libfile = os.path.join(paths.module_path(), "lib", libname)
+    if not os.path.exists(libfile):
+        _cxfreeze_libfile = os.path.join(
+            paths.embedded_data_path(), "lib", "accessible_output2", "lib", libname
+        )
+        if os.path.exists(_cxfreeze_libfile):
+            libfile = _cxfreeze_libfile
     if cdll:
         return ctypes.cdll[libfile]
     return ctypes.windll[libfile]
