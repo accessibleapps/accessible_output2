@@ -36,7 +36,7 @@ class SAPI5(Output):
         try:
             self.object = load_com("SAPI.SPVoice")
             self._voices = self._available_voices()
-        except pywintypes.com_error:
+        except (pywintypes.com_error, TypeError):
             raise OutputError
         self._pitch = 0
 
