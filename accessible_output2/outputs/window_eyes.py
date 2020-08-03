@@ -13,7 +13,7 @@ class WindowEyes(Output):
         super(WindowEyes, self).__init__(*args, **kwargs)
         try:
             self.object = load_com("gwspeak.speak")
-        except pywintypes.com_error:
+        except (pywintypes.com_error, TypeError):
             raise OutputError
 
     def speak(self, text, interrupt=0):
