@@ -14,7 +14,7 @@ class Jaws(Output):
         super(Jaws, self).__init__(*args, **kwargs)
         try:
             self.object = load_com("FreedomSci.JawsApi", "jfwapi")
-        except pywintypes.com_error:
+        except (pywintypes.com_error, TypeError):
             raise OutputError
 
     def braille(self, text, **options):
