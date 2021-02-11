@@ -50,9 +50,9 @@ class SpeechDispatcher(Output):
         self._client.cancel()
 
     def close(self):
-        # Unfortunately this is never called (or too late).
-        # It should be called in a try finally
-        self._client.close() # or the program won't close
+        # With speechd < 1.10.2, this method must be called
+        # for the program to close correctly.
+        self._client.close()
 
 
 output_class = SpeechDispatcher
