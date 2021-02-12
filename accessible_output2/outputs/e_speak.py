@@ -10,6 +10,7 @@ class ESpeak(Output):
 	"""
 
     name = "Linux ESpeak"
+    priority = 101
     _ec = None
 
     def __init__(self):
