@@ -1,25 +1,32 @@
-from __future__ import absolute_import
+import subprocess, psutil
 
-from .base import Output
+from accessible_output2.outputs.base import Output
 
 class VoiceOver(Output):
-
     """Speech output supporting the Apple VoiceOver screen reader."""
 
     name = "VoiceOver"
 
-    def __init__(self, *args, **kwargs):
-        import appscript
-        self.app = appscript.app("voiceover")
+    def run_apple_script(self, command, process = "voiceover"):
+        return subprocess.Popen(["osascript", "-e",
+            f"tell application \"{process}\"\n{command}\nend tell"],
+            stdout = subprocess.PIPE).communicate()[0]
 
     def speak(self, text, interrupt=False):
-        self.app.output(text)
+        # apple script output command seems to interrupt by default
+        # if an empty string is provided itseems to force voiceover to not interrupt
+        if not interrupt:
+                self.silence()
+        self.run_apple_script(f"output \"{text}\"")
 
-    def silence(self):
-        self.app.output(u"")
+    def silence (self):
+        self.run_apple_script("output \"\"")
 
     def is_active(self):
-        return self.app.isrunning()
+        for process in psutil.process_iter():
+            if process.name().lower() == "voiceover":
+                return True
 
+        return False
 
 output_class = VoiceOver
