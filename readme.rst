@@ -45,7 +45,6 @@ The first way is through Apple Script, which requires the user to enable the Voi
 
 If Voiceover is not running, The NSSpeechSynthesizer object is used. This will use a separate instance of VoiceOver, using default VoiceOver settings which are customizable from the provided class similar to SAPI5 for Windows.
 
-The error thrown by VoiceOver if Apple Script is disabled is:  
-Note: This error can not be caught in python  
-.. code-block
-    execution error: VoiceOver got an error: AppleEvent handler failed.
+Error thrown by VoiceOver if Apple Script is disabled: (This error can not be caught in python )
+
+execution error: VoiceOver got an error: AppleEvent handler failed.
