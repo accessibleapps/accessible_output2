@@ -7,6 +7,13 @@ class VoiceOver(Output):
 
     name = "VoiceOver"
 
+    def __init__(self, *args, **kwargs):
+        from AppKit import NSSpeechSynthesizer
+        self.NSSpeechSynthesizer = NSSpeechSynthesizer
+
+    def is_speaking(self):
+        return self.NSSpeechSynthesizer.isAnyApplicationSpeaking()
+
     def run_apple_script(self, command, process = "voiceover"):
         return subprocess.Popen(["osascript", "-e",
             f"tell application \"{process}\"\n{command}\nend tell"],
