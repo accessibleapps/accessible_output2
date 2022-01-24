@@ -26,7 +26,7 @@ class ZDSR(Output):
     def is_active(self):
         try:
             if not self.is_loaded: self.load()
-            return self.lib.IsSpeaking() != 2
+            return self.lib.GetSpeakState() != 2
         except:
             return False
 
