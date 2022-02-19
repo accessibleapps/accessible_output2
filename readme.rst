@@ -24,6 +24,7 @@ Speech:
 - System Access
 - Supernova and other Dolphin products
 - PC Talker
+- ZDSR
 - Microsoft Speech API
 
 

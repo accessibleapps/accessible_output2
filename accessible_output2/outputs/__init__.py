@@ -28,6 +28,7 @@ if platform.system() == "Windows":
     from . import system_access
     from . import dolphin
     from . import pc_talker
+    from . import zdsr
 
     # import sapi4
 

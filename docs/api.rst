@@ -81,6 +81,13 @@ Developer Interface
     :members:
 
 
+`accessible_output2.outputs.zdsr`
+=================================
+
+.. automodule:: accessible_output2.outputs.zdsr
+    :members:
+
+
 `accessible_output2.outputs.base`
 =================================
 
