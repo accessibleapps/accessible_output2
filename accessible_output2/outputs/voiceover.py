@@ -20,23 +20,24 @@ class VoiceOver(Output):
         return str.replace("\\", "\\\\") \
                 .replace("\"", "\\\"")
 
-    def is_speaking(self):
-        return self.NSSpeechSynthesizer.isAnyApplicationSpeaking()
-
     def speak(self, text, interrupt=False):
-        # apple script output command seems to interrupt by default
-        # if an empty string is provided itseems to force voiceover to not interrupt
-        if not interrupt:
-                self.silence()
+        sanitized_text = self.sanitize(text)
+        # The silence function does not seem to work.
+        # osascript takes time to execute, so voiceover usually starts talking  before being silenced
+        if interrupt:
+            self.silence()
 
-        sanitized_text = sanitize(text)
         self.run_apple_script(f"output \"{sanitized_text}\"")
 
     def silence (self):
         self.run_apple_script("output \"\"")
 
+    def is_speaking(self):
+        return self.NSSpeechSynthesizer.isAnyApplicationSpeaking()
+
     def is_active(self):
-        return subprocess.Popen(["pgrep", "--count", "--ignore-case", "--exact", "voiceover"],
-            stdout = subprocess.PIPE).communicate()[0].startswith(b"0")
+        # If no process is found, an empty string is returned
+        return bool(subprocess.Popen(["pgrep", "-x", "VoiceOver"],
+            stdout = subprocess.PIPE).communicate()[0])
 
 output_class = VoiceOver
