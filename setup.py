@@ -12,7 +12,7 @@ setup(
     name="accessible_output2",
     author="Tyler Spivey",
     author_email="tspivey@pcdesk.net",
-    version="0.16",
+    version="0.17",
     description=__doc__,
     long_description=long_description,
     package_dir={"accessible_output2": "accessible_output2"},
