@@ -26,6 +26,8 @@ Speech:
 - PC Talker
 - ZDSR
 - Microsoft Speech API
+- VoiceOver
+- E-Speak
 
 
 Braille:
@@ -36,3 +38,14 @@ Braille:
 - System Access
 - Supernova and other Dolphin products
 
+Note for Apple Users:
+------------------
+VoiceOver is supported by accessible_output2 in two different ways.
+
+The first way is through Apple Script, which requires the user to enable the VoiceOver setting "Allow Voiceover to be controled by Apple Script". This method will provide output to the running     instance of voiceover. This no longer checks if VoiceOver has this setting enabled or not due to the expensive cost of running an Apple Script query everytime is_active is called. This means that if the VoiceOver setting is disabled, and VoiceOver is running, an error will be thrown by VoiceOver if you attempt to speak with VoiceOver, rather than automaticly switching to the secondary speech output system. Application developers that are providing support for VoiceOver are encouraged to provide some notification to the user about enabling Voiceover to be controled by Apple Script, or to just disable VoiceOver altogether to use the default speech output.
+
+If Voiceover is not running, The NSSpeechSynthesizer object is used. This will use a separate instance of VoiceOver, using default VoiceOver settings which are customizable from the provided class similar to SAPI5 for Windows.
+
+Error thrown by VoiceOver if Apple Script is disabled: (This error can not be caught in python )
+
+execution error: VoiceOver got an error: AppleEvent handler failed.
