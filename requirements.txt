@@ -1,2 +1,3 @@
 libloader
 platform_utils
+pyobjc; sys_platform == 'darwin'
