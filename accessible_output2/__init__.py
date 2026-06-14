@@ -1,26 +1,20 @@
 from __future__ import absolute_import
 import ctypes
-import os
 import types
-from platform_utils import paths
+from pathlib import Path
+
+lib = Path(__file__).parent / "lib"
 
 
 def load_library(libname, cdll=False):
-    if paths.is_frozen():
-        libfile = os.path.join(
-            paths.embedded_data_path(), "accessible_output2", "lib", libname
-        )
-    else:
-        libfile = os.path.join(paths.module_path(), "lib", libname)
-    if not os.path.exists(libfile):
-        _cxfreeze_libfile = os.path.join(
-            paths.embedded_data_path(), "lib", "accessible_output2", "lib", libname
-        )
-        if os.path.exists(_cxfreeze_libfile):
-            libfile = _cxfreeze_libfile
-    if cdll:
-        return ctypes.cdll[libfile]
-    return ctypes.windll[libfile]
+
+    lib_path = lib / libname
+    libfile = str(lib_path)
+    dll_loader = ctypes.cdll if cdll else ctypes.windll
+    try:
+        return dll_loader[libfile]
+    except AttributeError:
+        return None
 
 
 def get_output_classes():
@@ -33,16 +27,3 @@ def get_output_classes():
         if isinstance(m, module_type) and hasattr(m, "output_class")
     ]
     return sorted(classes, key=lambda c: c.priority)
-
-
-def find_datafiles():
-    import platform
-    from glob import glob
-    import accessible_output2
-
-    if platform.system() != "Windows":
-        return []
-    path = os.path.join(accessible_output2.__path__[0], "lib", "*.dll")
-    results = glob(path)
-    dest_dir = os.path.join("accessible_output2", "lib")
-    return [(dest_dir, results)]

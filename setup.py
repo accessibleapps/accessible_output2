@@ -1,9 +1,7 @@
 from setuptools import setup, find_packages
 import io
 
-__doc__ = (
-    """Library to provide speech and braille output to a variety of different screen readers and other accessibility solutions."""
-)
+__doc__ = """Library to provide speech and braille output to a variety of different screen readers and other accessibility solutions."""
 
 with io.open("readme.rst", encoding="UTF8") as readme:
     long_description = readme.read()
@@ -19,7 +17,9 @@ setup(
     packages=find_packages(),
     package_data={"accessible_output2": ["lib/*"]},
     zip_safe=False,
-    install_requires=["libloader", "platform_utils"],
+    install_requires=[
+        "libloader",
+    ],
     extras_require={
         ':sys_platform == "win32"': ["pywin32", "libloader"],
         ':sys_platform == "darwin"': ["appscript"],
