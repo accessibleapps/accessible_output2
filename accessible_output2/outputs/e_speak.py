@@ -17,18 +17,26 @@ class ESpeak(Output):
         try:
             import espeak.core
             self._ec = espeak.core
-        except Exception as error:
-            raise OutputError(error)
+            if self._ec is None:
+                raise OutputError("espeak.core is not available")
+        except OutputError:
+            raise
+        except Exception as e:
+            raise OutputError(e)
 
     def is_active(self):
         return self._ec is not None
 
     def speak(self, text, interrupt=0):
+        if not self.is_active():
+            return
         if interrupt:
             self.silence()
         self._ec.synth(text)
 
     def silence(self):
+        if not self.is_active():
+            return
         self._ec.cancel()
 
 
