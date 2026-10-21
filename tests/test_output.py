@@ -22,7 +22,7 @@ class OutputTests(unittest.TestCase):
         modules.start()
         self.addCleanup(modules.stop)
         self.package = package
-        for name in ("base", "auto"):
+        for name in ("base", "auto", "e_speak"):
             fullname = "accessible_output2.outputs." + name
             spec = importlib.util.spec_from_file_location(
                 fullname, source / "outputs" / (name + ".py"))
@@ -93,6 +93,20 @@ class OutputTests(unittest.TestCase):
                 self.assertIsNone(output.output(text, False))
                 self.assertEqual(backend.spoken, (text, False))
                 self.assertEqual(backend.brailled, (text, {}))
+
+    def test_espeak_missing_optional_module_raises_output_error(self):
+        with patch.dict(sys.modules, {"espeak": None, "espeak.core": None}):
+            with self.assertRaises(self.base.OutputError):
+                self.e_speak.ESpeak()
+        self.package.load_library.assert_not_called()
+
+    def test_auto_excludes_espeak_when_optional_module_is_missing(self):
+        self.package.get_output_classes = lambda: [self.e_speak.ESpeak]
+        with patch.dict(sys.modules, {"espeak": None, "espeak.core": None}):
+            output = self.auto.Auto()
+        self.assertIsNone(output.get_first_available_output())
+        self.assertEqual(output.outputs, [])
+        self.package.load_library.assert_not_called()
 
 
 if __name__ == "__main__":
