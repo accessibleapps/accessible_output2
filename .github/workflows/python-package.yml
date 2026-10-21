@@ -47,3 +47,42 @@ jobs:
       run: uv run --no-project python -m unittest discover -s tests -v
     - name: Build package
       run: uv build
+
+  macos:
+    name: macOS package and offline tests (${{ matrix.python-version }}, ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-15-intel
+            python-version: "3.8"
+          - os: macos-15
+            python-version: "3.10"
+    env:
+      PYTHON_VERSION: ${{ matrix.python-version }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+    - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+      with:
+        version: "0.8.8"
+        python-version: ${{ matrix.python-version }}
+    - name: Build distributions and install the wheel's declared dependencies
+      run: |
+        uv build
+        uv venv --python "$PYTHON_VERSION"
+        uv pip install dist/*.whl
+        uv pip check
+        uv pip list
+    - name: Import installed macOS provider without speaking
+      working-directory: ${{ runner.temp }}
+      run: |
+        "$GITHUB_WORKSPACE/.venv/bin/python" -c "import sys, platform, appscript, accessible_output2; from importlib.metadata import version; from accessible_output2.outputs.voiceover import VoiceOver; print(sys.version, platform.machine(), accessible_output2.__file__, version('appscript'), VoiceOver.__name__)"
+    - name: Run controlled dispatch tests without native speech
+      run: .venv/bin/python -m unittest discover -s tests -v
