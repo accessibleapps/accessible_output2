@@ -1,5 +1,5 @@
 from __future__ import absolute_import
-from .base import Output
+from .base import Output, OutputError
 
 class ESpeak(Output):
     """Supports ESpeak on Linux
@@ -17,8 +17,8 @@ class ESpeak(Output):
         try:
             import espeak.core
             self._ec = espeak.core
-        except:
-            print("Cannot find espeak.core. Please install python-espeak or python3-espeak.")
+        except Exception as error:
+            raise OutputError(error)
 
     def is_active(self):
         return self._ec is not None
