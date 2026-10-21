@@ -2,6 +2,8 @@
 Prepare original PR #13 as an independent owned alternative at current default, preserving its VoiceOver/osascript behavior and richer NSSpeech controls while fixing bounded error/dependency/docs defects. Do not combine its fallback with #16 or claim unavailable AT evidence.
 
 # State
+Measurement2026-10-21: owned #28 remains open/unmerged. Last completed published cleanup a3c92a24c7b61f3f6f7576f60063d6988ea20e9d measurement is run39556289236, all5jobs green with16 controlled tests per leg and installed-provider imports, unused appscript removed (root verified). Its actual source follow-up still requested F2; local bac04e248eb2f07a108af68e3a2e1b2fafa7d6ac repairs that combined-output reporting pending publication/fresh actual re-review and hosted results. These are dated predecessor measurements; live PR checks are authoritative for later commits, not a promised result at this note's own commit.
+
 Owned #28 published cleanup head is a3c92a24c7b61f3f6f7576f60063d6988ea20e9d on landed baseline27/default2ed2c5785fa48860325c40634ba4e76dbe79fc44, preserved at archive/task6-output2-voiceover-before-output-error-fix. Earlier unused-appscript/rebase/original0f0b34993fb4b271f88b5cb2581d194704d1c70f archives, canonical master57bda997/five dirty files, forks/worktrees remain preserved. Root independently read gated follow-up/source and authorized provider-only combined-output error repair retaining direct speak Boolean API. Root owns publication/review/merge; owned26 receives its separate equivalent repair.
 
 # Decisions and why
@@ -14,7 +16,7 @@ Python3.13.6, python tests/test_voiceover.py -v against original proposal behavi
 
 Initial authored-workflow actionlint1.7.12 -shellcheck= -pyflakes= passed0; once-only zizmor1.31.1 --offline --pedantic exits11 only for the unnamed Linux build job's informational finding. The39-line Mac Intel3.8/ARM3.10 job is now inherited from baseline27; this feature changes its provider smoke imports. No local full CI/native/osascript/model action or audit rerun for this cleanup.
 
-Published70a1115a actual run39553949462 succeeded on all5jobs (Linux3.8/3.9/3.10, Intel3.8, ARM3.10); existing16 controlled tests per leg and installed-wheel provider imports passed. ARM installed/built appscript1.5.0 despite no package-source consumer. Fresh PR/head/run read confirmed these results before cleanup. These characterize pre-cleanup behavior; new cleanup head hosted results and review are pending.
+Historical published70a1115a run39553949462 succeeded on all5jobs (Linux3.8/3.9/3.10, Intel3.8, ARM3.10);16 controlled tests per leg and installed-wheel imports passed. ARM built unused appscript1.5.0. Fresh PR/head/run read confirmed this pre-cleanup measurement; later completed cleanup-head run39556289236 above supersedes its then-pending cleanup CI status. Fresh combined-output repair review/CI remains pending.
 
 The matching owned #26 gate established historical dependency red: run39548966763 Intel3.8 job119053528045 resolved Cocoa10.3.2 to core11.1, whose build exits "PyObjC: Need at least Python 3.9"; all Linux and ARM3.10 jobs passed. Official11.0 release notes drop3.8 and11.0/11.1 core setup MIN_PYTHON=(3,9), although11.1 PyPI declares>=3.8. Core10.3.2 provides cp38 Intel/universal2 wheels. Retain the proven narrow Darwin/Python<3.9 core<11 constraint in setup/requirements; other runtimes stay unconstrained.
 
