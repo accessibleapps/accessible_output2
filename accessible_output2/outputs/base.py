@@ -65,9 +65,9 @@ class Output(object):
             RuntimeError: If the requested output doesn't define either speak or braille.
         """
         output = False
-        if self.speak(text, **options):
+        if self.speak(text, **options) is not False:
             output = True
-        if self.braille(text, **options):
+        if self.braille(text, **options) is not False:
             output = True
         if not output:
             raise RuntimeError(

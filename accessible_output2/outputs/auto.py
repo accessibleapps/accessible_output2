@@ -51,7 +51,7 @@ class Auto(Output):
     def output(self, *args, **kwargs):
         output = self.get_first_available_output()
         if output:
-            output.speak(*args, **kwargs)
+            output.output(*args, **kwargs)
 
     def is_system_output(self):
         """Returns True if this output is a system output."""
