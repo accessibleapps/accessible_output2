@@ -119,8 +119,20 @@ class VoiceOverTests(unittest.TestCase):
         for result in (True, False):
             self.synth.startSpeakingString_.return_value = result
             self.assertIs(backend.speak("message", False), result)
-        with self.assertRaises(RuntimeError):
-            backend.output("message")
+        self.activity.communicate.return_value = (b"", b"")
+        output = self.auto.Auto()
+        self.synth.startSpeakingString_.reset_mock()
+        for name, emit in (("provider", backend.output), ("auto", output.output)):
+            with self.subTest(output=name):
+                with self.assertRaisesRegex(self.base.OutputError, "speech"):
+                    emit("message", False)
+        self.assertEqual(self.synth.startSpeakingString_.call_args_list, [
+            call("message"), call("message")])
+        for result in (True, None):
+            with self.subTest(braille_result=result):
+                backend.braille = Mock(return_value=result)
+                self.assertIsNone(backend.output("message", interrupt=True))
+                backend.braille.assert_called_once_with("message", interrupt=True)
         self.package.load_library.assert_not_called()
 
 
