@@ -20,7 +20,7 @@ class ZDSR(Output):
     }
 
     def load(self):
-        self.lib.InitTTS(0,"")
+        self.lib.InitTTS(0,"",True)
         self.is_loaded=True
 
     def is_active(self):
