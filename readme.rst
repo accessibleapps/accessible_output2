@@ -26,6 +26,7 @@ Speech:
 - PC Talker
 - ZDSR
 - Microsoft Speech API
+- macOS NSSpeechSynthesizer
 
 
 Braille:
@@ -35,4 +36,10 @@ Braille:
 - Window Eyes
 - System Access
 - Supernova and other Dolphin products
+
+macOS speech
+------------
+MacSpeech provides system text-to-speech through NSSpeechSynthesizer, separate
+from the VoiceOver screen reader. Automatic selection prefers the existing
+VoiceOver backend when it is active, then uses MacSpeech as the system fallback.
 
