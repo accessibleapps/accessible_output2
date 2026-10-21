@@ -74,6 +74,26 @@ class OutputTests(unittest.TestCase):
         self.auto.Auto().output("message")
         backend.output.assert_not_called()
 
+    def test_auto_preserves_positional_interrupt_for_keyboard_help(self):
+        class Backend(self.base.Output):
+            def is_active(self):
+                return True
+
+            def speak(self, text, interrupt=False):
+                self.spoken = (text, interrupt)
+
+            def braille(self, text, **options):
+                self.brailled = (text, options)
+
+        backend = Backend()
+        self.package.get_output_classes = lambda: [lambda: backend]
+        output = self.auto.Auto()
+        for text in ("Keyboard help activated", "Keyboard help deactivated"):
+            with self.subTest(text=text):
+                self.assertIsNone(output.output(text, False))
+                self.assertEqual(backend.spoken, (text, False))
+                self.assertEqual(backend.brailled, (text, {}))
+
 
 if __name__ == "__main__":
     unittest.main()
