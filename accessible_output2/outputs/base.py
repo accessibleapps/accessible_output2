@@ -2,7 +2,7 @@ from accessible_output2 import load_library
 import platform
 
 
-class OutputError(Exception):
+class OutputError(RuntimeError):
     """Raised by outputs if they fail to initialize or output"""
     pass
 
