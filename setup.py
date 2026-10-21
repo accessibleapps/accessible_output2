@@ -22,7 +22,7 @@ setup(
     install_requires=["libloader", "platform_utils"],
     extras_require={
         ':sys_platform == "win32"': ["pywin32", "libloader"],
-        ':sys_platform == "darwin"': ["appscript"],
+        ':sys_platform == "darwin"': ["appscript", "pyobjc-framework-Cocoa"],
         # Appscript 1.2.5 is the last release with Python 3.8 macOS wheels.
         ':sys_platform == "darwin" and python_version < "3.9"': ["appscript<1.3"],
     },
