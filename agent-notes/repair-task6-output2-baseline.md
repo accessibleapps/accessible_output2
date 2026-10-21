@@ -4,7 +4,7 @@ Repair the documented combined speech/braille dispatch contract on master before
 
 # State
 
-Local preparation on master 57bda997d98e87dd78aa049e7021cf777871619b. This branch contains only the three production-line changes proposed in PR #20's original dispatch commit, six controlled tests and the existing workflow's bounded read-only CI amendment. No fork or remote branch has been written. Publication and actual Claude review remain coordinator gates.
+Published as accessibleapps-owned draft PR #24 on master 57bda997d98e87dd78aa049e7021cf777871619b, initial head d9af7c24cfe58b0f0a679d6aaca57f736995d85b. The three production-line changes, six controlled tests and workflow are unchanged. No external fork was written. This note-only update awaits coordinator publication review; actual Claude review, exact final-head hosted green and merge authorization remain gates.
 
 # Decisions and why
 
@@ -14,7 +14,7 @@ Local preparation on master 57bda997d98e87dd78aa049e7021cf777871619b. This branc
 
 # Verification
 
-The actively authored tests/test_output.py ran against unchanged master: six tests, one failure (Auto called speak instead of output) and two errors (None-returning speech/braille raised RuntimeError). Three controls passed. After the three-line correction the same file passed all six on Python 3.13. Actionlint 1.7.12 and offline zizmor 1.31.1 passed the authored workflow (one zizmor suppression). Full lint/test/build runs belong to hosted CI and were not run locally.
+Historical local evidence: the actively authored tests/test_output.py against unchanged master had one failure (Auto called speak instead of output), two errors (None-returning channels raised RuntimeError) and three passing controls; after the three-line correction all six passed on Python 3.13. Actionlint 1.7.12 and offline zizmor 1.31.1 passed the authored workflow (one suppression). Hosted run 39528266498 passed on initial head d9af7c24 for Python 3.8/3.9/3.10: package install/root import, fatal Flake8, six tests and wheel/sdist build. Advisory style output and existing setuptools deprecation warnings remain. Full CI was not run locally.
 
 # Surprises
 
@@ -22,4 +22,4 @@ Canonical C:/Users/Q/code/accessible_output2 has five pre-existing tracked EOL-o
 
 # Next step
 
-Return the complete local diff and exact committed head for coordinator review, then await concrete publication authority. Do not approve #23's action_required run or execute live AT/native DLL integration.
+Return the note-only fast-forward head for coordinator publication review; then obtain actual Claude review and exact final-head hosted green before any merge. Do not publish the separate local ESpeak stack, approve #23's action_required run or execute live AT/native DLL integration.
