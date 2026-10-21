@@ -26,6 +26,8 @@ Speech:
 - PC Talker
 - ZDSR
 - Microsoft Speech API
+- VoiceOver
+- macOS NSSpeechSynthesizer
 
 
 Braille:
@@ -35,4 +37,18 @@ Braille:
 - Window Eyes
 - System Access
 - Supernova and other Dolphin products
+
+Note for Apple Users:
+---------------------
+VoiceOver sends AppleScript output to the running screen reader and requires
+the existing "Allow AppleScript to control VoiceOver" setting. Its activity
+check detects the process; it does not verify scripting permission. A failed
+osascript launch or nonzero command result raises OutputError with the error
+message. Auto does not retry another backend after a speech-time error.
+
+When VoiceOver is inactive, SystemVoiceOver provides system text-to-speech
+through NSSpeechSynthesizer. This is separate from VoiceOver and uses the
+system's default speech voice. Its voice, rate and volume controls configure
+that synthesizer. The proposed is_speaking methods use NSSpeechSynthesizer's
+global speech-activity query, not a VoiceOver-specific state check.
 

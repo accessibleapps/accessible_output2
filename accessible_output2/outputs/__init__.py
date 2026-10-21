@@ -34,6 +34,7 @@ if platform.system() == "Windows":
 
 if platform.system() == "Darwin":
     from . import voiceover
+    from . import system_voiceover
 
 if platform.system() == "Linux":
     from . import speech_dispatcher

@@ -1,2 +1,4 @@
 libloader
 platform_utils
+pyobjc-framework-Cocoa; sys_platform == 'darwin'
+pyobjc-core<11; sys_platform == 'darwin' and python_version < '3.9'

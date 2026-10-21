@@ -80,9 +80,9 @@ jobs:
         uv pip install dist/*.whl
         uv pip check
         uv pip list
-    - name: Import installed macOS provider without speaking
+    - name: Import installed macOS providers without speaking
       working-directory: ${{ runner.temp }}
       run: |
-        "$GITHUB_WORKSPACE/.venv/bin/python" -c "import sys, platform, appscript, accessible_output2; from importlib.metadata import version; from accessible_output2.outputs.voiceover import VoiceOver; print(sys.version, platform.machine(), accessible_output2.__file__, version('appscript'), VoiceOver.__name__)"
+        "$GITHUB_WORKSPACE/.venv/bin/python" -c "import sys, platform, accessible_output2; from importlib.metadata import version; from AppKit import NSSpeechSynthesizer; from accessible_output2.outputs.voiceover import VoiceOver; from accessible_output2.outputs.system_voiceover import SystemVoiceOver; print(sys.version, platform.machine(), accessible_output2.__file__, version('pyobjc-framework-Cocoa'), VoiceOver.__name__, SystemVoiceOver.__name__)"
     - name: Run controlled dispatch tests without native speech
       run: .venv/bin/python -m unittest discover -s tests -v
