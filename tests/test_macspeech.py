@@ -65,10 +65,21 @@ class MacSpeechTests(unittest.TestCase):
                 self.assertIs(output.speak("message", False), result)
         self.synth.stopSpeaking.assert_not_called()
 
-    def test_false_native_result_remains_unsupported_combined_output(self):
+    def test_false_native_result_raises_output_error_unless_braille_succeeds(self):
         self.synth.startSpeakingString_.return_value = False
-        with self.assertRaises(RuntimeError):
-            self.nsspeechsynthesizer.MacSpeech().output("message")
+        backend = self.nsspeechsynthesizer.MacSpeech()
+        output = self.auto.Auto()
+        for name, emit in (("provider", backend.output), ("auto", output.output)):
+            with self.subTest(output=name):
+                with self.assertRaisesRegex(self.base.OutputError, "speech"):
+                    emit("message", False)
+        self.assertEqual(self.synth.startSpeakingString_.call_args_list, [
+            call("message"), call("message")])
+        for result in (True, None):
+            with self.subTest(braille_result=result):
+                backend.braille = Mock(return_value=result)
+                self.assertIsNone(backend.output("message", interrupt=True))
+                backend.braille.assert_called_once_with("message", interrupt=True)
 
     def test_auto_fallback_preserves_positional_and_keyword_interrupt(self):
         output = self.auto.Auto()

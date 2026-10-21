@@ -23,6 +23,12 @@ class MacSpeech(Output):
             self.silence()
         return self.synth.startSpeakingString_(text)
 
+    def output(self, text, *args, **options):
+        speech_result = self.speak(text, *args, **options)
+        braille_result = self.braille(text, **options)
+        if speech_result is False and braille_result is False:
+            raise OutputError("NSSpeechSynthesizer failed to start speech output")
+
     def silence(self):
         self.synth.stopSpeaking()
 
