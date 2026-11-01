@@ -127,24 +127,23 @@ class OutputTests(unittest.TestCase):
         self.assertEqual(output.outputs, [])
 
     def test_zdsr_dll_load_failure_raises_output_error(self):
-        windll = MagicMock()
-        windll.__getitem__.side_effect = OSError("not a valid Win32 application")
+        windll = Mock(side_effect=OSError("not a valid Win32 application"))
         with tempfile.TemporaryDirectory() as root:
             self.zdsr_install(root)
             with patch.dict(os.environ, {"ProgramFiles(x86)": root}), \
-                    patch.object(ctypes, "windll", windll, create=True):
+                    patch.object(ctypes, "WinDLL", windll, create=True):
                 with self.assertRaises(self.base.OutputError):
                     self.zdsr.ZDSR()
 
     def test_zdsr_loads_dll_from_install_folder(self):
-        windll = MagicMock()
+        windll = Mock(return_value=MagicMock())
         with tempfile.TemporaryDirectory() as root:
             folder = self.zdsr_install(root)
             environment = {"ProgramFiles(x86)": "", "ProgramFiles": root}
             with patch.dict(os.environ, environment), \
-                    patch.object(ctypes, "windll", windll, create=True):
+                    patch.object(ctypes, "WinDLL", windll, create=True):
                 output = self.zdsr.ZDSR()
-        loaded = Path(windll.__getitem__.call_args.args[0])
+        loaded = Path(windll.call_args.args[0])
         self.assertEqual(loaded.parent, folder)
         self.assertIn(loaded.name, ("ZDSRAPI.dll", "ZDSRAPI_x64.dll"))
         output.lib.GetSpeakState.return_value = 3

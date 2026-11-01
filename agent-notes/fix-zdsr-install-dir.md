@@ -22,6 +22,11 @@ replaces outside PR #18, which only swapped the bundled copies for 2023 builds.
 
 ## Decisions and why
 
+- Load with ctypes.WinDLL(path), not ctypes.windll[path]. From Python 3.12,
+  LibraryLoader.__getattr__ turns a load OSError into AttributeError
+  (CPython 3.12-3.14 Lib/ctypes/__init__.py), which the OutputError
+  conversion would miss. WinDLL raises OSError on every version.
+
 - No registry lookup: the vendor documents only the folder path.
 - GetSpeakState()==1 (version mismatch) still counts as active, unchanged
   from master; Q left it out of scope.

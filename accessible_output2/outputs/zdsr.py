@@ -31,7 +31,7 @@ class ZDSR(Output):
         else:
             raise OutputError("ZDSR is not installed")
         try:
-            self.lib = ctypes.windll[libfile]
+            self.lib = ctypes.WinDLL(libfile)
         except OSError as error:
             raise OutputError(error)
 
