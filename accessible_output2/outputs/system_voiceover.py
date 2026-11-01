@@ -7,7 +7,7 @@ from .base import Output, OutputError
 class SystemVoiceOver(Output):
     """System text-to-speech output using NSSpeechSynthesizer."""
 
-    name = "VoiceOver"
+    name = "macOS NSSpeechSynthesizer"
     priority = 101
     system_output = True
 

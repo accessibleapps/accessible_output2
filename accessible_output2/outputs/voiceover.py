@@ -33,8 +33,8 @@ class VoiceOver(Output):
 
     def speak(self, text, interrupt=False):
         sanitized_text = self.sanitize(text)
-        # The silence function does not seem to work.
-        # osascript takes time to execute, so voiceover usually starts talking  before being silenced
+        # silence() sends an empty VoiceOver output and waits for its osascript
+        # process to exit before the new text is sent.
         if interrupt:
             self.silence()
 

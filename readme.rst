@@ -49,6 +49,6 @@ message. Auto does not retry another backend after a speech-time error.
 When VoiceOver is inactive, SystemVoiceOver provides system text-to-speech
 through NSSpeechSynthesizer. This is separate from VoiceOver and uses the
 system's default speech voice. Its voice, rate and volume controls configure
-that synthesizer. The proposed is_speaking methods use NSSpeechSynthesizer's
+that synthesizer. On both outputs, is_speaking reports NSSpeechSynthesizer's
 global speech-activity query, not a VoiceOver-specific state check.
 
