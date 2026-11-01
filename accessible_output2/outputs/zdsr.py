@@ -1,26 +1,43 @@
 from __future__ import absolute_import
+import ctypes
 import os
 import platform
-import ctypes
 
-from platform_utils import paths
-from libloader import load_library
-from .base import Output
+from .base import Output, OutputError
 
 
 class ZDSR(Output):
-    """Supports The ZDSR screen reader"""
+    """Supports The ZDSR screen reader
+
+    The API DLLs are loaded from ZDSR's install folder. ZDSR's API
+    documentation (https://www.zdsr.com/docs/api/zdsr-api) recommends this
+    over bundling copies, which stop matching when ZDSR updates its DLLs.
+    """
 
     name = "ZDSR"
-    lib32 = "ZDSRAPI.dll"
-    lib64 = "ZDSRAPI_x64.dll"
     is_loaded=False
-    argtypes = {
-        "speak": (ctypes.c_wchar_p,),
-    }
+
+    def __init__(self):
+        if platform.architecture()[0] == "32bit":
+            libname = "ZDSRAPI.dll"
+        else:
+            libname = "ZDSRAPI_x64.dll"
+        for variable in ("ProgramFiles(x86)", "ProgramFiles"):
+            folder = os.environ.get(variable)
+            if folder:
+                libfile = os.path.join(folder, "zdsr", "zdsr", libname)
+                if os.path.exists(libfile):
+                    break
+        else:
+            raise OutputError("ZDSR is not installed")
+        try:
+            self.lib = ctypes.WinDLL(libfile)
+        except OSError as error:
+            raise OutputError(error)
 
     def load(self):
-        self.lib.InitTTS(0,"")
+        # InitTTS(int type, const WCHAR *channelName, BOOL bKeyDownInterrupt)
+        self.lib.InitTTS(0, "", True)
         self.is_loaded=True
 
     def is_active(self):
