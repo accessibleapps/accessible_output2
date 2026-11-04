@@ -36,6 +36,7 @@ if platform.system() == "Darwin":
     from . import voiceover
 
 if platform.system() == "Linux":
+    from . import orca
     from . import speech_dispatcher
     from . import e_speak
 

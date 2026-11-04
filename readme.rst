@@ -26,6 +26,7 @@ Speech:
 - PC Talker
 - ZDSR
 - Microsoft Speech API
+- Orca Screen Reader (Linux)
 
 
 Braille:
@@ -35,4 +36,5 @@ Braille:
 - Window Eyes
 - System Access
 - Supernova and other Dolphin products
+- Orca Screen Reader (Linux)
 
