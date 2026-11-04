@@ -35,4 +35,5 @@ Braille:
 - Window Eyes
 - System Access
 - Supernova and other Dolphin products
+- ZDSR
 
