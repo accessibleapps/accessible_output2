@@ -51,6 +51,10 @@ class ZDSR(Output):
         if not self.is_loaded: self.load()
         self.lib.Speak(text,interrupt)
 
+    def braille(self, text, **options):
+        if not self.is_loaded: self.load()
+        self.lib.Braille(text,True)
+
     def silence(self):
         if not self.is_loaded: self.load()
         self.lib.StopSpeak()
